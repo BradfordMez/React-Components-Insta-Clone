@@ -8,9 +8,6 @@
 import React,{useState} from 'react';
 // Import the Posts (plural!) and SearchBar components, since they are used inside App component
 import Posts from './components/Posts/Posts'
-import Post from './components/Posts/Post'
-import PostHeader from './components/Posts/PostHeader';
-import LikeSection from './components/Posts/LikeSection';
 import SearchBar from './components/SearchBar/SearchBar';
 // Import the dummyData
 import dummyData from './dummy-data';
@@ -24,7 +21,7 @@ const App = () => {
   // To make the search bar work (which is stretch) we'd need another state to hold the search term.
 
   const likePost = postId => {
-    setPosts(posts.map(post=>post.id === postId ? {...post} : {...post, Likes: post.likes + 1}))
+    setPosts(posts.map(post=>post.id === postId ? {...post, likes: post.likes + 1}:{...post} ))
 
     /*
       This function serves the purpose of increasing the number of likes by one, of the post with a given id.
@@ -43,10 +40,7 @@ const App = () => {
   return (
     <div className='App'>
       <SearchBar/>
-      <Posts/>
-      {/* <Post/> */}
-      {/* <PostHeader/> */}
-
+      <Posts likePost = {likePost} posts={posts}/>
       {/* Add SearchBar and Posts here to render them */}
       {/* Check the implementation of each component, to see what props they require, if any! */}
     </div>
